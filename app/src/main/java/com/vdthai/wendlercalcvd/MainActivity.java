@@ -15,25 +15,25 @@ public class MainActivity extends AppCompatActivity implements Presenter.View {
     public void updateFields( double[] trainingWeights ){
         // Week 1
         TextView w1Set1Text = (TextView) findViewById(R.id.w1Set1Field);
-        w1Set1Text.setText( "65% 5 x " + Double.toString( trainingWeights[0] ) );
+        w1Set1Text.setText( String.valueOf( "65% 5 x " + trainingWeights[0] ) );
         TextView w1Set2Text = (TextView) findViewById(R.id.w1Set2Field);
-        w1Set2Text.setText( "75% 5 x " + Double.toString( trainingWeights[1] ) );
+        w1Set2Text.setText( String.valueOf( "75% 5 x " + trainingWeights[1] ) );
         TextView w1Set3Text = (TextView) findViewById(R.id.w1Set3Field);
-        w1Set3Text.setText( "85% 5 x " + Double.toString( trainingWeights[2] ) );
+        w1Set3Text.setText( String.valueOf( "85% 5 x " + trainingWeights[2] ) );
         // Week 2
         TextView w2Set1Text = (TextView) findViewById(R.id.w2Set1Field);
-        w2Set1Text.setText( "70% 3 x " + Double.toString( trainingWeights[3] ) );
+        w2Set1Text.setText( String.valueOf( "70% 3 x " + trainingWeights[3] ) );
         TextView w2Set2Text = (TextView) findViewById(R.id.w2Set2Field);
-        w2Set2Text.setText( "80% 3 x " + Double.toString( trainingWeights[4] ) );
+        w2Set2Text.setText( String.valueOf( "80% 3 x " + trainingWeights[4] ) );
         TextView w2Set3Text = (TextView) findViewById(R.id.w2Set3Field);
-        w2Set3Text.setText( "90% 3 x " + Double.toString( trainingWeights[5] ) );
+        w2Set3Text.setText( String.valueOf( "90% 3 x " + trainingWeights[5] ) );
         // Week 3
         TextView w3Set1Text = (TextView) findViewById(R.id.w3Set1Field);
-        w3Set1Text.setText( "75% 5 x " + Double.toString( trainingWeights[6] ) );
+        w3Set1Text.setText( String.valueOf( "75% 5 x " + trainingWeights[6] ) );
         TextView w3Set2Text = (TextView) findViewById(R.id.w3Set2Field);
-        w3Set2Text.setText( "85% 3 x " + Double.toString( trainingWeights[7] ) );
+        w3Set2Text.setText( String.valueOf( "85% 3 x " + trainingWeights[7] ) );
         TextView w3Set3Text = (TextView) findViewById(R.id.w3Set3Field);
-        w3Set3Text.setText( "95% 1 x " + Double.toString( trainingWeights[8] ) );
+        w3Set3Text.setText( String.valueOf( "95% 1 x " + trainingWeights[8] ) );
     }
 
     @Override
@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements Presenter.View {
             public void onClick(View view) {
                 // Get value of trainingMax-EditText, check if empty.
                 if( !trainingMaxVal.getText().toString().isEmpty() ){
-                    // Double[] will be returned here to set fields.
                     // If checkBox is marked, roundWeights
                     CheckBox calcRounded = (CheckBox)findViewById(R.id.checkBox);
                     if( calcRounded.isChecked() ){

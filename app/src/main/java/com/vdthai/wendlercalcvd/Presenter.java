@@ -19,10 +19,21 @@ public class Presenter {
         calculator = new Calculator();
     }
 
+    /**
+     * calcWeights
+     * @param trainingMax the training max for the cycle.
+     * @return list of exact training weights for the cycle.
+     */
     public double[] calcWeights( double trainingMax ){
         return calculator.calculateTrainingWeigths( trainingMax );
     }
 
+    /**
+     * calcRoundedWeights: rounds the weights based on the kg-plates;
+     * 1,25 kg, 2,5 kg, 5,0 kg, 10,0 kg, 20,0 kg
+     * @param trainingMax the training max for the cycle.
+     * @return list of rounded training weights for the cycle.
+     */
     public double[] calcRoundedWeights( double trainingMax ){
         return calculator.roundCalculatedWeights( calculator.calculateTrainingWeigths( trainingMax ) );
     }

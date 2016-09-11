@@ -1,23 +1,23 @@
 package com.vdthai.wendlercalcvd;
 
-import android.util.Log;
-
 /**
  * Created by vdthai on 2016-09-07.
  */
 public class Calculator {
 
-    private double trainingMax;
     private double[] trainingWeights;
 
     public Calculator(){
-        // Initialize T.M to 0
-        trainingMax = 0;
+        // Initialize list of training weights for the cycle
         trainingWeights = new double[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     }
 
-    public double[] calculateTrainingWeigths( double tm ){
-        trainingMax = tm;
+    /**
+     * calculateTrainingWeigths: calculates the weights.
+     * @param trainingMax the training max received.
+     * @return list of exact training weights for the cycle.
+     */
+    public double[] calculateTrainingWeigths( double trainingMax ){
         trainingWeights[0] = trainingMax * 0.65;
         trainingWeights[1] = trainingMax * 0.75;
         trainingWeights[2] = trainingMax * 0.85;
@@ -30,34 +30,30 @@ public class Calculator {
         return trainingWeights;
     }
 
+    /**
+     * roundCalculatedWeights: check for single digit of training weight
+     * and round to nearest valid value: 0.0, 2.5, 5.0, 7.5 or 10.0
+     * @param trainingList the list of exact training weights for the cycle.
+     * @return list of rounded training weights for the cycle.
+     */
     public double[] roundCalculatedWeights( double[] trainingList ){
-/*        Log.d("DEBUG", "Exact value = " + trainingWeights[0] );
-        double f = 0.5;
-        Log.d("DEBUG", "Rounded value = " + (f*(Math.round(trainingWeights[0]/f))) );
-        Log.d("DEBUG", "Decimal value = " + ( trainingWeights[0]-(int)trainingWeights[0] ) );*/
         for( int i = 0; i < trainingList.length; i++ ) {
-            double f;
-            double decimal = trainingWeights[0] - (int) trainingWeights[0];
-            Log.d("DEBUG", "Exact value = " + trainingWeights[0]);
-            if (decimal < 0.12) {
-                trainingWeights[0] -= decimal;
-                Log.d("DEBUG", "Rounded value = " + trainingWeights[0]);
-            } else if (decimal < 0.32) {
-                f = 0.25;
-                trainingWeights[0] = f * (Math.round(trainingWeights[0] / f));
-                Log.d("DEBUG", "Rounded value = " + trainingWeights[0]);
-            } else if (decimal < 0.63) {
-                f = 0.5;
-                trainingWeights[0] = f * (Math.round(trainingWeights[0] / f));
-                Log.d("DEBUG", "Rounded value = " + trainingWeights[0]);
-            } else if (decimal < 0.87) {
-                f = 0.75;
-                trainingWeights[0] = f * (Math.round(trainingWeights[0] / f));
-                Log.d("DEBUG", "Rounded value = " + trainingWeights[0]);
+            // Find single digit of the training weight
+            double valueToRound = trainingWeights[i] % 10;
+            if( valueToRound < 1.3 ){
+                trainingWeights[i] -= valueToRound;
+            } else if( valueToRound < 3.8 ){
+                trainingWeights[i] -= valueToRound;
+                trainingWeights[i] += 2.5;
+            } else if( valueToRound < 6.3 ){
+                trainingWeights[i] -= valueToRound;
+                trainingWeights[i] += 5.0;
+            } else if( valueToRound < 8.8 ){
+                trainingWeights[i] -= valueToRound;
+                trainingWeights[i] += 7.5;
             } else {
-                f = 1;
-                trainingWeights[0] = f * (Math.round(trainingWeights[0] / f));
-                Log.d("DEBUG", "Rounded value = " + trainingWeights[0]);
+                trainingWeights[i] -= valueToRound;
+                trainingWeights[i] += 10.0;
             }
         }
         return trainingWeights;

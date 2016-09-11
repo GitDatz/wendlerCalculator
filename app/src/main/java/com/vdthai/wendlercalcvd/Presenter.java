@@ -1,7 +1,5 @@
 package com.vdthai.wendlercalcvd;
 
-import android.view.View;
-
 /**
  * Created by vdthai on 2016-09-07.
  */

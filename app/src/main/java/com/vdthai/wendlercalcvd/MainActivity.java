@@ -1,8 +1,10 @@
 package com.vdthai.wendlercalcvd;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -57,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements Presenter.View {
                         updateFields( presenter.calcWeights( Double.parseDouble( trainingMaxVal.getText().toString() ) ) );
                     }
                 }
+                // Hide keyboard after calculating training weights
+                InputMethodManager imm = (InputMethodManager) getSystemService( Activity.INPUT_METHOD_SERVICE );
+                imm.toggleSoftInput( InputMethodManager.HIDE_IMPLICIT_ONLY, 0 );
             }
         });
     }
